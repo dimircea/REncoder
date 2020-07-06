@@ -73,12 +73,12 @@ For this examples, **all** the library parameters, available in the ```REncoderC
 
 ## Example 2 - Enabling the Switch
 
-For this example, only the ```RENCODER_ENABLE_SWITCH``` parameter, available in the ```REncoderConfig.h``` configuration file is switched on. The extra code, by comparison with ```Example 1``` is marked as bold.
+For this example, only the ```RENCODER_ENABLE_SWITCH``` parameter, available in the ```REncoderConfig.h``` configuration file is switched on. The extra code, by comparison with ```Example 1``` is marked as bold and colored in blue.
 
 <pre><code>
     #include "REncoder.h"
     
-    REncoder rEncoder(3 /* CLK Pin*/, 4 /* DT Pin */<b>, 2 /* SW Pin */</b>);
+    REncoder rEncoder(3 /* CLK Pin*/, 4 /* DT Pin */<b style="color: blue">, 2 /* SW Pin */</b>);
 
     void setup() {
       rEncoder.setMinEncoderPosition(-2);
@@ -102,7 +102,7 @@ For this example, only the ```RENCODER_ENABLE_SWITCH``` parameter, available in 
           // NOTE: you can use rEncoder.getPosition() to get the current encoder position
         break;
         
-        <b>case REncoder::Event::REncoder_Event_Switch_Pushed: 
+        <b style="color: blue">case REncoder::Event::REncoder_Event_Switch_Pushed: 
           // The switch was activated / the button was pressed
           // // Here add code for what you'll like to happen in this case...
         break;</b>
