@@ -44,7 +44,10 @@ For this examples, **all** the library parameters, available in the ```REncoderC
 ```
     #include "REncoder.h"
     
-    REncoder rEncoder(3 /* CLK Pin*/, 4 /* DT Pin */);
+    REncoder rEncoder(
+        3, // the CLK Pin 
+        4  // the DT 
+    );
 
     void setup() {
       rEncoder.setMinEncoderPosition(-2);
@@ -78,7 +81,10 @@ For this example, only the ```RENCODER_ENABLE_SWITCH``` parameter, available in 
 <pre><code>
     #include "REncoder.h"
     
-    REncoder rEncoder(3 /* CLK Pin*/, 4 /* DT Pin */<span style="color: blue"><b>, 2 /* SW Pin */</b></span>);
+    REncoder rEncoder(
+        3, // the CLK Pin 
+        4, // the DT Pin 
+        <b>2 // the SW Pin</b>);
 
     void setup() {
       rEncoder.setMinEncoderPosition(-2);
