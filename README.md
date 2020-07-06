@@ -78,7 +78,7 @@ For this example, only the ```RENCODER_ENABLE_SWITCH``` parameter, available in 
 <pre><code>
     #include "REncoder.h"
     
-    REncoder rEncoder(3 /* CLK Pin*/, 4 /* DT Pin */<b style="color: blue">, 2 /* SW Pin */</b>);
+    REncoder rEncoder(3 /* CLK Pin*/, 4 /* DT Pin */<span style="color: blue"><b>, 2 /* SW Pin */</b></span>);
 
     void setup() {
       rEncoder.setMinEncoderPosition(-2);
