@@ -7,6 +7,8 @@ At first, I was thinking: *of course there are tons of such libraries !*, so i'v
 
 In addition, I wanted to be able to control some things, like if IRQs must be used or not, if the push of the switch is detected continuously, to set limits on the maximum and minimum value of the encoder rotation, and so on. While some of these features were (partially) available in some other libraries, I wasn't satisfied with the results, so it was the time to get to work and create a such library. A few hours and two cups of caffe later, I come up with this library. Feel free to use it if you need it.
 
+My measurements shown that the library itself, with just one instance, had a footprint of about 30 Bytes RAM and 1200 Bytes FLASH when no IRQ and no Switch was used. This depends of course on the board (the above are for on an Arduino UNO) and compiler, and your code will add up on top of that. 
+
 # How to install REncoder
 
 Rencoder is basicaly just another Arduino library. To use it, you have multiple choices, such as:
@@ -29,5 +31,45 @@ The following parameters / flags are available:
 
 # Available features
 
-# MIT License - feel free to use it as you like, but don't blame me :)
+# Usage examples
+
+In the ```examples``` folder you'll find a set of basic examples. The code comments (in particular, check the header files) may also help in special cases. 
+
+In addition, here are some relevant use cases that shall give you the feeling on how you can use the library and what it can do.
+
+## Example 1 - Simple Encoder: no IRQ and no Switch
+```
+    #include "REncoder.h"
+    REncoder rEncoder(3 /* CLK Pin*/, 4 /* DT Pin */);
+
+    void setup() {
+      rEncoder.setMinEncoderPosition(-2);
+      rEncoder.setMaxEncoderPosition(3);
+    }
+    
+    void loop() {
+        
+      REncoder::Event encoderEvent = rEncoder.reState();
+      
+      switch (encoderEvent) {
+        case REncoder::Event::REncoder_Event_Rotate_CW: 
+          // use rEncoder.getPosition() to get the current position
+          // This is the case when the encoder is rotated Clock Wise
+          // Here add code for what you'll like to happen in this case...
+        break;
+
+        case REncoder::Event::REncoder_Event_Rotate_CCW: 
+          // use rEncoder.getPosition() to get the current position
+          // This is the case when the encoder is rotated Counter Clock Wise
+          // Here add code for what you'll like to happen in this case...
+        break;
+      }
+    }
+
+## Example 2 - Enabling the Switch
+## Example 3 - Use IRQ(s)
+## Example 4 - Special features
+
+
+## MIT License - free to use at your own risk
 
