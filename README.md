@@ -14,3 +14,15 @@ Rencoder is basicaly just another Arduino library. To use it, you have multiple 
 - download the souce code from here and then copy / paste the header (.h) and implementation files (.cpp) files somewhere on your project folder then use ```#include "path-to-library-folder"``` to load them on your sketch;
 - use PlatformIO IDE and refer the library on your project.
 - ... or imagine something by yourself and do it so ...
+
+# Configure the library
+
+This library is configurable. The configuration parameters are available in the ```REncoderConfig.h``` file. Due to the way on how the compilation works, you can't simply just define these parameters as part of your own code, i.e., inside your sketch file. The parameters affects the compilation, since the code is compiled based on these parameters. The main reason is to keep the usage of the RAM / FLASH resources as low as possible...these are anyway very limited in some boards.
+
+The following parameters / flags are available:
+
+- ```RENCODER_ENABLE_SWITCH```: enable or disable the switch on the rotary encoder. This only works of course if and only if a switch is builtin the rotary encoder. Alternatively, you can use a button in combination with a simple rotary encoder.
+- ```RENCODER_ENABLE_SWITCH_IRQ```: enable or disable the IRQ for the switch. When using this, make sure that the GPIO connected to the switch / button pin is one that supports interrupts (IRQ). Otherwise, it will either not work at all, or worst, it will make your program act strange...unpredictible.
+- ```RENCODER_ENABLE_SWITCH_SOFTWARE_DEBOUNCING```: enable or disable software debouncing for the switch. While this may be an alternative to real debouncing, it also uses additional resources and it is not optimal when the switch ages, and debouncing becomes harder to be done in the software. Alternatively, use a 01.uF / 100nF capacitor between the SW (or the button) pin and the GND.
+
+
