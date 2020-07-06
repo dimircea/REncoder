@@ -40,6 +40,7 @@ In addition, here are some relevant use cases that shall give you the feeling on
 ## Example 1 - Simple Encoder: no IRQ and no Switch
 ```
     #include "REncoder.h"
+    
     REncoder rEncoder(3 /* CLK Pin*/, 4 /* DT Pin */);
 
     void setup() {
@@ -65,6 +66,7 @@ In addition, here are some relevant use cases that shall give you the feeling on
         break;
       }
     }
+```
 
 ## Example 2 - Enabling the Switch
 ## Example 3 - Use IRQ(s)
