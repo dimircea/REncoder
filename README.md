@@ -38,6 +38,9 @@ In the ```examples``` folder you'll find a set of basic examples. The code comme
 In addition, here are some relevant use cases that shall give you the feeling on how you can use the library and what it can do.
 
 ## Example 1 - Simple Encoder: no IRQ and no Switch
+
+For this examples, **all** the library parameters, available in the ```REncoderConfig.h``` configuration file are switched off. 
+
 ```
     #include "REncoder.h"
     
@@ -69,6 +72,44 @@ In addition, here are some relevant use cases that shall give you the feeling on
 ```
 
 ## Example 2 - Enabling the Switch
+
+For this example, only the ```RENCODER_ENABLE_SWITCH``` parameter, available in the ```REncoderConfig.h``` configuration file is switched on. The extra code, by comparison with ```Example 1``` is marked as bold.
+
+<pre><code>
+    #include "REncoder.h"
+    
+    REncoder rEncoder(3 /* CLK Pin*/, 4 /* DT Pin */<b>, 2 /* SW Pin */</b>);
+
+    void setup() {
+      rEncoder.setMinEncoderPosition(-2);
+      rEncoder.setMaxEncoderPosition(3);
+    }
+    
+    void loop() {
+        
+      REncoder::Event encoderEvent = rEncoder.reState();
+      
+      switch (encoderEvent) {
+        case REncoder::Event::REncoder_Event_Rotate_CW: 
+          // This is the case when the encoder is rotated Clock Wise
+          // Here add code for what you'll like to happen in this case...
+          // NOTE: you can use rEncoder.getPosition() to get the current encoder position
+        break;
+
+        case REncoder::Event::REncoder_Event_Rotate_CCW:  
+          // This is the case when the encoder is rotated Counter Clock Wise
+          // Here add code for what you'll like to happen in this case...
+          // NOTE: you can use rEncoder.getPosition() to get the current encoder position
+        break;
+        
+        <b>case REncoder::Event::REncoder_Event_Switch_Pushed: 
+          // The switch was activated / the button was pressed
+          // // Here add code for what you'll like to happen in this case...
+        break;</b>
+      }
+    }
+</code></pre>
+
 ## Example 3 - Use IRQ(s)
 ## Example 4 - Special features
 
