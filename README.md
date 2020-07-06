@@ -76,7 +76,7 @@ For this examples, **all** the library parameters, available in the ```REncoderC
 
 ## Example 2 - Enabling the Switch
 
-For this example, only the ```RENCODER_ENABLE_SWITCH``` parameter, available in the ```REncoderConfig.h``` configuration file is switched on. The extra code, by comparison with ```Example 1``` is marked as bold and colored in blue.
+For this example, only the ```RENCODER_ENABLE_SWITCH``` parameter, available in the ```REncoderConfig.h``` configuration file is switched on. The extra code, by comparison with ```Example 1``` is marked as bold.
 
 <pre><code>
     #include "REncoder.h"
@@ -84,7 +84,8 @@ For this example, only the ```RENCODER_ENABLE_SWITCH``` parameter, available in 
     REncoder rEncoder(
         3, // the CLK Pin 
         4, // the DT Pin 
-        <b>2 // the SW Pin</b>);
+        <b>2 // the SW Pin</b> 
+    );
 
     void setup() {
       rEncoder.setMinEncoderPosition(-2);
@@ -117,6 +118,42 @@ For this example, only the ```RENCODER_ENABLE_SWITCH``` parameter, available in 
 </code></pre>
 
 ## Example 3 - Use IRQ(s)
+For this example the following parameters were enabled: ```RENCODER_ENABLE_SWITCH```, ```RENCODER_ENABLE_SWITCH_IRQ``` and ```RENCODER_ENABLE_ENCODER_IRQ```. All these parameters are available in the ```REncoderConfig.h``` configuration file. Notice how the call to ```rEncoder.reState()``` is now missing. It is also important to notice that one can still use IRQ for the switch but not for the encoder, and the other way around. All this is possible by enabling and/or disabling the following two parameters: ```RENCODER_ENABLE_SWITCH_IRQ``` and ```RENCODER_ENABLE_ENCODER_IRQ```.
+
+<pre><code>
+    #include "REncoder.h"
+    
+    REncoder rEncoder(
+        3, // the CLK Pin 
+        4, // the DT Pin 
+        <b>2 // the SW Pin</b> 
+    );
+    
+    void setup() {
+      rEncoder.attachSwitchHandler([]() {
+        // here add your code to be executed when the switch is pressed
+      });
+
+      rEncoder.attachEncoderHandler(
+        [](REncoderWithoutSwitch::Event encoderEvent, int16_t encPos) {
+        
+        switch (encoderEvent) {
+          case REncoder::Event::REncoder_Event_Rotate_CW: 
+            // here add your code to be executed when the encoder is rotated Clock Wise
+            // The current value of the rotation is provided by the <b>encPos</b> parameter
+          break;
+
+          case REncoder::Event::REncoder_Event_Rotate_CCW: 
+            // here add your code to be executed when the encoder is rotated Counter Clock Wise
+            // The current value of the rotation is provided by the <b>encPos</b> parameter
+          break;
+        }
+      });
+    }
+    
+    void loop() {}
+</code></pre>
+
 ## Example 4 - Special features
 
 
