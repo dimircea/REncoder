@@ -12,5 +12,5 @@ In addition, I wanted to be able to control some things, like if IRQs must be us
 Rencoder is basicaly just another Arduino library. To use it, you have multiple choices, such as:
 - download it as zip and install it on your Arduino IDE by using the *"Sketch > Include Library > Add .ZIP Library"* menu;
 - download the souce code from here and then copy / paste the header (.h) and implementation files (.cpp) files somewhere on your project folder then use ```#include "path-to-library-folder"``` to load them on your sketch;
-- use PlatformIO IDE and refer these libraries on your project.
-- imagine something by yourself and do it so.
+- use PlatformIO IDE and refer the library on your project.
+- ... or imagine something by yourself and do it so ...
