@@ -23,7 +23,7 @@
  * of the following parameter is commented out) then the SWITCH 
  * will not be used by this library.
  */ 
-//#define RENCODER_ENABLE_SWITCH
+#define RENCODER_ENABLE_SWITCH
 
 /**
  *  ENABLE (uncomment the definition of RENCODER_ENABLE_SWITCH_IRQ) 
@@ -44,7 +44,7 @@
  *       resources (RAM/FLASH) are freed up and the overall usability also improves.
  *       
  */ 
-//#define RENCODER_ENABLE_SWITCH_SOFTWARE_DEBOUNCING
+#define RENCODER_ENABLE_SWITCH_SOFTWARE_DEBOUNCING
 
 /****************************************
  ** --- ENCODER RELATED PARAMETERS --- **
@@ -68,7 +68,7 @@
  *       By doing so, a small amount of resources (RAM/FLASH) are freed up and the overall 
  *       usability / feeling may also improve.
  */ 
-//#define RENCODER_ENABLE_ENCODER_SOFTWARE_DEBOUNCING
+#define RENCODER_ENABLE_ENCODER_SOFTWARE_DEBOUNCING
 
 /** 
  * ENABLE (uncomment the definition of RENCODER_ENABLE_ENCODER_LONG_RANGE_ROTATION) 
