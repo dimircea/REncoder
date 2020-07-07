@@ -157,8 +157,53 @@ For this example the following parameters were enabled: ```RENCODER_ENABLE_SWITC
     void loop() {}
 </code></pre>
 
-## Example 4 - Special features
+## Some Special features
 
+One of the features that I wanted to have and no other library provided it, was to allow to rotate the encoder when the switch was pushed. This feature only works when the button does not use an IRQ and it is **enabled by default**. It can be controlled by calling the method ```enableEncoderWhenSwitchPushed``` with ```true``` to enable it and ```false``` to disable it.
+
+<pre><code>
+    #include "REncoder.h"
+    
+    REncoder rEncoder(
+        3, // the CLK Pin 
+        4, // the DT Pin 
+        2 // the SW Pin 
+    );
+    
+    void setup() {
+      // ... some code ...
+      
+      <b>// disable the encoder when the switch is kept pressed
+      rEncoder.enableEncoderWhenSwitchPushed(false) </b>
+      
+      // ... some code ...
+    }
+    
+    void loop () {...}
+<pre><code>
+
+Another feature that I wanted to have, was to be able to keep the button pressed and to get the event continuously. This was needed to be able to use the encoder with a user interface. This feature only works when the button does not use an IRQ and it is **disabled by default**. It can be controlled by calling the method ```enableContinuousSwitchDetection``` with ```true``` to enable it and ```false``` to disable it.
+
+<pre><code>
+    #include "REncoder.h"
+    
+    REncoder rEncoder(
+        3, // the CLK Pin 
+        4, // the DT Pin 
+        2 // the SW Pin 
+    );
+    
+    void setup() {
+      // ... some code ...
+      
+      <b>// enable the continuous detection of the switch pressed event
+      rEncoder.enableContinuousSwitchDetection(true)</b> 
+      
+      // ... some code ...
+    }
+    
+    void loop () {...}
+<pre><code>
 
 ## MIT License - free to use at your own risk
 
