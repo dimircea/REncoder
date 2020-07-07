@@ -8,11 +8,11 @@ REncoderWithoutSwitch::REncoderWithoutSwitch(int8_t clkPin, int8_t dtPin) {
 };
 
 #ifndef RENCODER_ENABLE_ENCODER_IRQ
-  int16_t REncoderWithoutSwitch::getPosition(void) {
+  RENCODER_ROTATION_VALUE_TYPE REncoderWithoutSwitch::getPosition(void) {
     return this->encoderPosition;
   };
 
-  void REncoderWithoutSwitch::setPosition(int16_t encoderPosition) {
+  void REncoderWithoutSwitch::setPosition(RENCODER_ROTATION_VALUE_TYPE encoderPosition) {
     if (encoderPosition > this->maxPosition) {
       this->encoderPosition = this->maxPosition;
     } else if (encoderPosition < this->minPosition) {
@@ -23,11 +23,11 @@ REncoderWithoutSwitch::REncoderWithoutSwitch(int8_t clkPin, int8_t dtPin) {
   };
 #endif
 
-void REncoderWithoutSwitch::setMinEncoderPosition(int16_t minPosition) {
+void REncoderWithoutSwitch::setMinEncoderPosition(RENCODER_ROTATION_VALUE_TYPE minPosition) {
   this->minPosition = minPosition;
 };
 
-void REncoderWithoutSwitch::setMaxEncoderPosition(int16_t maxPosition) {
+void REncoderWithoutSwitch::setMaxEncoderPosition(RENCODER_ROTATION_VALUE_TYPE maxPosition) {
   this->maxPosition = maxPosition;
 };
 
@@ -46,13 +46,13 @@ void REncoderWithoutSwitch::init() {
 };
 
 #ifdef RENCODER_ENABLE_ENCODER_IRQ
-  void REncoderWithoutSwitch::attachEncoderHandler(void (*encoderHandler)(REncoderWithoutSwitch::Event, int16_t)) {
+  void REncoderWithoutSwitch::attachEncoderHandler(void (*encoderHandler)(REncoderWithoutSwitch::Event, RENCODER_ROTATION_VALUE_TYPE)) {
     if (this->clkPin >= 0 && this->dtPin >= 0 && encoderHandler) {
 
-      static void (*eventHandler)(REncoderWithoutSwitch::Event, int16_t) = encoderHandler;
-      static int16_t encoderPosition = 0;
-      static int16_t minPosition = this->minPosition;
-      static int16_t maxPosition = this->maxPosition;
+      static void (*eventHandler)(REncoderWithoutSwitch::Event, RENCODER_ROTATION_VALUE_TYPE) = encoderHandler;
+      static RENCODER_ROTATION_VALUE_TYPE encoderPosition = 0;
+      static RENCODER_ROTATION_VALUE_TYPE minPosition = this->minPosition;
+      static RENCODER_ROTATION_VALUE_TYPE maxPosition = this->maxPosition;
 
       static uint8_t clkPin = this->clkPin;
       static uint8_t dtPin = this->dtPin;
@@ -68,7 +68,7 @@ void REncoderWithoutSwitch::init() {
           uint8_t clkState = digitalRead(clkPin);
           REncoderWithoutSwitch::Event event;
           if (clkState ^ lastClkState) {
-            if (digitalRead(dtPin) != clkState) {
+            if (digitalRead(dtPin) == lastClkState) {
               if (encoderPosition < maxPosition) {
                 encoderPosition++;
               }
@@ -101,7 +101,7 @@ void REncoderWithoutSwitch::init() {
 
         // CLK has a different state as when checked last time...
         if (this->lastClkState ^ clkState) {
-            if (dtState != clkState) {
+            if (dtState == this->lastClkState) {
               if (this->encoderPosition < this->maxPosition) {
                 this->encoderPosition++;
               }

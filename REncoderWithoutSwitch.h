@@ -2,7 +2,20 @@
   #define __RENCODER_WITHOUT_SWITCH_H
 
   #include <Arduino.h>
+  #include <limits.h>
   #include "REncoderConfig.h"
+
+    
+  #ifdef RENCODER_ENABLE_ENCODER_LONG_RANGE_ROTATION
+    typedef long  RENCODER_ROTATION_VALUE_TYPE;
+    #define RENCODER_ROTATION_MIN_VALUE LONG_MIN
+    #define RENCODER_ROTATION_MAX_VALUE LONG_MAX
+  #else
+    typedef int RENCODER_ROTATION_VALUE_TYPE;
+    #define RENCODER_ROTATION_MIN_VALUE INT_MIN  
+    #define RENCODER_ROTATION_MAX_VALUE INT_MAX
+  #endif
+
 
   /**
    * @brief An implementation of a rotary encoder without a built-in switch button.
@@ -31,17 +44,17 @@
         /**
          * @brief Get the encoder position. It can a positive or negative integer value.
          *        "Position" means the number of steps moved to the left (-1) / right (+1).
-         * @return the encoder position value of type int16_t (a value between in range [−32768, +32767]).
+         * @return the encoder position value
          */
-        int16_t getPosition(void);
+        RENCODER_ROTATION_VALUE_TYPE getPosition(void);
 
         /**
          * @brief Set the actual encoder position. It can a positive or negative integer value.
          *        "Position" means the number of steps moved to the left (-1) / right (+1).
          * @param encoderPosition
-         *        the new encoder position value of type int16_t (a value between in range [−32768, +32767]).
+         *        the new encoder position value 
          */
-        void setPosition(int16_t encoderPosition);
+        void setPosition(RENCODER_ROTATION_VALUE_TYPE encoderPosition);
       #endif
 
       /**
@@ -49,14 +62,14 @@
        * @param minPosition 
        *        minimum virtual position value - counter clock wise 
        */
-      void setMinEncoderPosition(int16_t minPosition);
+      void setMinEncoderPosition(RENCODER_ROTATION_VALUE_TYPE minPosition);
 
       /**
        * @brief set the maximum (CW, Clock-Wise) "virtual" position.
        * @param maxPosition 
        *        maximum virtual position value - counter clock wise 
        */
-      void setMaxEncoderPosition(int16_t maxPosition);
+      void setMaxEncoderPosition(RENCODER_ROTATION_VALUE_TYPE maxPosition);
 
       #ifdef RENCODER_ENABLE_ENCODER_IRQ
         /**
@@ -65,7 +78,7 @@
          *        is defined. 
          * @param encoderHandler - a function reference used as action for "ENCODER rotated" events.
          */
-        void attachEncoderHandler(void (*encoderHandler)(REncoderWithoutSwitch::Event, int16_t));
+        void attachEncoderHandler(void (*encoderHandler)(REncoderWithoutSwitch::Event, RENCODER_ROTATION_VALUE_TYPE));
       
       #else
         /**
@@ -101,7 +114,7 @@
          *  @see setMinEncoderPosition
          *  @see setMaxEncoderPosition
          */
-        int16_t encoderPosition = 0;
+        RENCODER_ROTATION_VALUE_TYPE encoderPosition = 0;
       #endif
 
       // the GPIO pin used for the encoder CLK (CLOCK) pin.
@@ -109,8 +122,8 @@
       // the GPIO pin used for the encoder DT (DATA) pin.
       int8_t dtPin = -1;  // -1 => not defined
 
-      int16_t maxPosition = 32767;  // default: max positive range
-      int16_t minPosition = -32768; // default: min negative range
+      RENCODER_ROTATION_VALUE_TYPE maxPosition = RENCODER_ROTATION_MAX_VALUE;  // default: max positive range
+      RENCODER_ROTATION_VALUE_TYPE minPosition = RENCODER_ROTATION_MIN_VALUE; // default: min negative range
   };
 
   #ifndef RENCODER_ENABLE_SWITCH

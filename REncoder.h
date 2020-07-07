@@ -16,11 +16,11 @@
 
   /**
    * Software debouncing for the SWITCH is only available 
-   * if the switch uses an IRQ.
+   * if the switch does NOT use IRQ.
    * The primarily reason for this is to not overcharge the ISR 
    * with all kind of code which actually shall not be there.
-   * Use an 0.1uF capacitor between the PW and GND pins instead 
-   * to get a simple harware deboucing. 
+   * Use a 0.1uF / 100nF capacitor between the PW and GND pins 
+   * instead to have simple harware deboucing. 
    */ 
   #ifdef RENCODER_ENABLE_SWITCH_IRQ
     #undef RENCODER_ENABLE_SWITCH_SOFTWARE_DEBOUNCING
@@ -28,11 +28,11 @@
 
   /**
    * Software debouncing for the ENCODER is only available 
-   * if the encoder uses IRQs.
+   * if the encoder does NOT use IRQs.
    * The primarily reason for this is to not overcharge the ISR 
    * with all kind of code which actually shall not be there.
-   * Use an 0.1uF capacitor between the CLK and GND pins as well 
-   * as between the DT and GND pins instead to get a simple 
+   * Use a 0.1uF / 100nF capacitor between the CLK and GND pins 
+   * as well as between the DT and GND pins instead to have simple 
    * harware deboucing. 
    */ 
   #ifdef RENCODER_ENABLE_ENCODER_IRQ
