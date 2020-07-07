@@ -126,7 +126,7 @@ For this example the following parameters were enabled: ```RENCODER_ENABLE_SWITC
     REncoder rEncoder(
         3, // the CLK Pin 
         4, // the DT Pin 
-        <b>2 // the SW Pin</b> 
+        2 // the SW Pin 
     );
     
     void setup() {
