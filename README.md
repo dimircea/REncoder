@@ -180,7 +180,7 @@ One of the features that I wanted to have and no other library provided it, was 
     }
     
     void loop () {...}
-<pre><code>
+</code></pre>
 
 Another feature that I wanted to have, was to be able to keep the button pressed and to get the event continuously. This was needed to be able to use the encoder with a user interface. This feature only works when the button does not use an IRQ and it is **disabled by default**. It can be controlled by calling the method ```enableContinuousSwitchDetection``` with ```true``` to enable it and ```false``` to disable it.
 
@@ -203,7 +203,7 @@ Another feature that I wanted to have, was to be able to keep the button pressed
     }
     
     void loop () {...}
-<pre><code>
+</code></pre>
 
 ## MIT License - free to use at your own risk
 
