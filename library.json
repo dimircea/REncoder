@@ -5,6 +5,7 @@
     "type": "git",
     "url": "https://github.com/dimircea/REncoder.git"
   },
+  "downloadUrl": "https://github.com/dimircea/REncoder/archive/master.zip",
   "authors": {
     "name": "Mircea Diaconescu",
     "url": "https://github.com/dimircea",
