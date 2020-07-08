@@ -1,6 +1,6 @@
 { "name": "REncoder",
   "keywords": "Rotary Encoder, Switch, Button",
-  "description": "Arduino library for Rotary Encoder with or without a builtin Switch",
+  "description": "Arduino library for Rotary Encoder with or without a builtin Switch. It can be used with or without IRQs, and it is configurable so that the resulted code uses as low RAM/FLASH as possible.",
   "repository": {
     "type": "git",
     "url": "https://github.com/dimircea/REncoder.git"
