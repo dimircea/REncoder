@@ -1,0 +1,20 @@
+{
+    "name": "REncoder",
+    "keywords": "Rotary Encoder, Switch, Button",
+    "description": "Arduino library for Rotary Encoder with or without a builtin Switch",
+    "repository":
+    {
+        "type": "git",
+        "url": "https://github.com/dimircea/REncoder.git"
+    },
+    "authors":
+    {
+        "name": "Mircea Diaconescu",
+        "url": "https://github.com/dimircea",
+        "maintainer": true
+    },
+    "version": "0.1.0",
+    "license": "MIT",
+    "frameworks": "arduino",
+    "platforms": "*"
+}
